@@ -8,5 +8,5 @@ export const searchCities = (query) => {
     const normalizedQuery = query.toLowerCase().trim();
 
     return cities.filter((city) =>
-        city.name.toLowerCase().startsWith(normalizedQuery).slice(0, 10));
+        city.name.toLowerCase().startsWith(normalizedQuery)).slice(0, 5);
 };
