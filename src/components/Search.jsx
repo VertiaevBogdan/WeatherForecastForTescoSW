@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {searchCities} from "../utils/cityUtils.js";
 
-export default function Search({ onCitySelected }) {
+export default function Search({ onCitySelect }) {
 
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
@@ -17,7 +17,7 @@ export default function Search({ onCitySelected }) {
     const handleCitySelect = (city) => {
         setQuery(`${city.name}, ${city.country}`);
         setSuggestions([]);
-        onCitySelected(city);
+        onCitySelect(city);
     };
 
 
