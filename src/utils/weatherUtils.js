@@ -2,7 +2,7 @@ export const transformWeatherData = (weatherData) => {
   const days = {};
 
     weatherData.list.forEach((item) => {
-      const date = item.dt_txt.split('')[0];
+      const date = item.dt_txt.split(' ')[0];
 
       if (!days[date]) {
           days[date] = {
