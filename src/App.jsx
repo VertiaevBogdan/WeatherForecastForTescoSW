@@ -1,6 +1,8 @@
 import Search from "./components/Search.jsx";
 import {useState} from "react";
 import {getWeather} from "./api/weatherApi.js";
+import {transformWeatherData} from "./utils/weatherUtils.js";
+import ForecastDisplay from "./components/ForecastDisplay.jsx";
 
 export default function App() {
 
@@ -15,8 +17,10 @@ export default function App() {
             city.coord.lon,
         );
 
-        setWeather(data)
+        const forecast = transformWeatherData(data);
+        setWeather(forecast)
     }
+
 
   return (
     <>
@@ -25,14 +29,10 @@ export default function App() {
           {selectedCity && (<div>
               Selected city: {selectedCity.name}
           </div>)}
-
-          {weather && (
-              <div>
-                    {JSON.stringify(weather, null, 2)}
-                </div>
-          )}
       </header>
-      <main></main>
+      <main>
+            <ForecastDisplay forecast={weather}/>
+      </main>
       <footer></footer>
     </>
   )
