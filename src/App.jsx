@@ -24,13 +24,18 @@ export default function App() {
 
   return (
     <>
-      <header>
+      <header className="wrapper">
         <Search onCitySelect={handleCitySelect}/>
           {selectedCity && (<div>
               Selected city: {selectedCity.name}
           </div>)}
       </header>
-      <main>
+      <main className="wrapper">
+          <div className="accent-info">
+              <h1 className="forecast-card__title">
+                  5-day forecast
+              </h1>
+          </div>
             <ForecastDisplay forecast={weather}/>
       </main>
       <footer></footer>

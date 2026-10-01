@@ -1,0 +1,19 @@
+@mixin flex {
+  display: flex;
+}
+
+@mixin flex-column {
+  @include flex;
+  flex-direction: column;
+}
+
+@mixin base-radius {
+  border-radius: 1.5em;
+}
+
+@mixin base-padding {
+  padding: 1.5em;
+}
+@mixin base-padding-top {
+  padding: 1.5em;
+}
