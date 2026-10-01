@@ -26,9 +26,6 @@ export default function App() {
     <>
       <header className="wrapper header-margin">
         <Search onCitySelect={handleCitySelect}/>
-          {selectedCity && (<div>
-              Selected city: {selectedCity.name}
-          </div>)}
       </header>
       <main className="wrapper">
           <div className="accent-info">

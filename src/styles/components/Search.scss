@@ -6,9 +6,12 @@
   background: $input-background-color;
   @include interactive-element-radius;
   color: $primary-text-color;
+  font-weight: bold;
 
   min-height: 2.75em;
   width: 100%;
+
+  padding: .75em;
 }
 
 .search__nav {
@@ -18,4 +21,24 @@
 
   gap: 1em;
 }
+.search__suggestions {
+  @include base-radius;
 
+  font-weight: bold;
+
+  padding: .5em 1em;
+
+  cursor: pointer;
+}
+
+.search__suggestion {
+  margin-bottom: .25em;
+
+  @include base-radius;
+
+  padding: .75em;
+
+  &:hover{
+    background: $background-default-hovered;
+  }
+}
