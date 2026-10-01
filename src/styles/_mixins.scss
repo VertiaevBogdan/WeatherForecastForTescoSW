@@ -11,6 +11,10 @@
   border-radius: 1.5em;
 }
 
+@mixin interactive-element-radius {
+  border-radius: 2em;
+}
+
 @mixin base-padding {
   padding: 1.5em;
 }

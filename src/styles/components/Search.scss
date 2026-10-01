@@ -1,0 +1,21 @@
+@use '../mixins' as *;
+@use '../variables' as *;
+
+.search__input {
+  border: .0625em solid $primary-border-color;
+  background: $input-background-color;
+  @include interactive-element-radius;
+  color: $primary-text-color;
+
+  min-height: 2.75em;
+  width: 100%;
+}
+
+.search__nav {
+  @include flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 1em;
+}
+

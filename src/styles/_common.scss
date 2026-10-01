@@ -2,7 +2,7 @@
 @use './variables' as *;
 
 .wrapper {
-  max-width: 1356px;
+  max-width: 62.5em;
   @include flex-column;
 
   margin: 0 auto;
@@ -39,4 +39,27 @@ h2, h3, h4, h5, h6 {
   z-index: 1;
 
   @include base-padding-top;
+}
+
+.header-margin {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.btn {
+  @include interactive-element-radius;
+  background: $button-background-color;
+  color: $primary-text-color;
+
+
+  font-weight: bold;
+
+  min-width: 9.5em;
+
+  padding: .75em 1em;
+  margin-left: 0;
+
+  &:hover {
+    background: $button-background-color-hovered;
+  }
 }

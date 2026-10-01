@@ -23,13 +23,21 @@ export default function Search({ onCitySelect }) {
 
     return (
         <form className="search">
-            <input
-                type="text"
-                className="search__input"
-                value={query}
-                onChange={handleChange}
-                placeholder="Search city"
-            />
+            <nav className="search__nav">
+                <button className="btn">
+                    Find me
+                </button>
+                <input
+                    type="text"
+                    className="search__input"
+                    value={query}
+                    onChange={handleChange}
+                    placeholder="Search city"
+                />
+                <button className="btn">
+                    second btn
+                </button>
+            </nav>
 
             {suggestions.length > 0 && (
                 <ul className="search__suggestions">

@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <>
-      <header className="wrapper">
+      <header className="wrapper header-margin">
         <Search onCitySelect={handleCitySelect}/>
           {selectedCity && (<div>
               Selected city: {selectedCity.name}
