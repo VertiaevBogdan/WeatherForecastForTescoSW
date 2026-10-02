@@ -3,6 +3,8 @@ import {useState} from "react";
 import {getWeather} from "./api/weatherApi.js";
 import {transformWeatherData} from "./utils/weatherUtils.js";
 import ForecastDisplay from "./components/ForecastDisplay.jsx";
+import { t } from './utils/translationsUtils.js';
+
 
 export default function App() {
 
@@ -89,13 +91,12 @@ export default function App() {
           <div className="accent-info">
               {selectedCity && (
                   <h1 className="forecast-card__title">
-                      5-day forecast for {selectedCity.name}, {selectedCity.country}
-                  </h1>
+                      {t('forecast')} {selectedCity.name}, {selectedCity.country}                  </h1>
               )}
 
               {isLoading && (
                   <p className="forecast__status">
-                      Loading weather...
+                      {t('loading')}
                   </p>
               )}
 

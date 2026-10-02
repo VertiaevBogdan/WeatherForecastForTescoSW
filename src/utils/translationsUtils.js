@@ -1,7 +1,7 @@
 const translations = {
     en: {
-        today: 'Today',
-        tomorrow: 'Tomorrow',
+        today: 'today',
+        tomorrow: 'tomorrow',
 
         now: 'Now',
         morning: 'Morning',
@@ -24,11 +24,21 @@ const translations = {
         loading: 'Loading weather...',
         loadError: 'Failed to load weather data',
         locationError: 'Unable to get your location',
+
+        clearSky: 'Clear sky',
+        fewClouds: 'Few clouds',
+        scatteredClouds: 'Scattered clouds',
+        brokenClouds: 'Broken clouds',
+        overcastClouds: 'Overcast clouds',
+        lightRain: 'Light rain',
+        moderateRain: 'Moderate rain',
+        heavyRain: 'Heavy rain',
+        snow: 'Snow',
     },
 
     cs: {
-        today: 'Dnes',
-        tomorrow: 'Zítra',
+        today: 'dnes',
+        tomorrow: 'zítra',
 
         now: 'Nyní',
         morning: 'Ráno',
@@ -51,6 +61,16 @@ const translations = {
         loading: 'Načítání počasí...',
         loadError: 'Nepodařilo se načíst počasí',
         locationError: 'Nepodařilo se získat polohu',
+
+        clearSky: 'Jasno',
+        fewClouds: 'Skoro jasno',
+        scatteredClouds: 'Polojasno',
+        brokenClouds: 'Oblačno',
+        overcastClouds: 'Zataženo',
+        lightRain: 'Slabý déšť',
+        moderateRain: 'Déšť',
+        heavyRain: 'Silný déšť',
+        snow: 'Sněžení',
     }
 };
 
@@ -64,4 +84,24 @@ const language = translations[browserLanguage]
 
 export const t = (key) => {
     return translations[language][key] ?? key;
+};
+
+const weatherDescriptionKeys = {
+    'clear sky': 'clearSky',
+    'few clouds': 'fewClouds',
+    'scattered clouds': 'scatteredClouds',
+    'broken clouds': 'brokenClouds',
+    'overcast clouds': 'overcastClouds',
+    'light rain': 'lightRain',
+    'moderate rain': 'moderateRain',
+    'heavy intensity rain': 'heavyRain',
+    'snow': 'snow',
+};
+
+export const translateWeather = (description) => {
+    const key = weatherDescriptionKeys[description];
+
+    return key
+        ? t(key)
+        : description;
 };

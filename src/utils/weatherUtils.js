@@ -1,3 +1,5 @@
+import { t } from './translationsUtils.js';
+
 const getDayPeriod = (hour) => {
     if (hour >= 6 && hour < 12) {
         return 'morning';
@@ -101,38 +103,7 @@ export const formatWeatherDate = (weatherDate) => {
     const targetDate = new Date(date);
     targetDate.setHours(0, 0, 0, 0);
 
-    const differenceInDays = Math.round(
-        (targetDate - today) / (1000 * 60 * 60 * 24),
-    )
-
     const formattedDate = new Intl.DateTimeFormat(
-        navigator.language,
-        {
-            day: 'numeric',
-            month: 'long',
-        }
-    ).format(date);
-
-    if (targetDate.getTime() === today.getTime()) {
-        return `Today, ${formattedDate}`;
-    }
-
-    if (targetDate.getTime() === tomorrow.getTime()) {
-        return `Tomorrow, ${formattedDate}`;
-    }
-
-    if (differenceInDays === 0 || differenceInDays === 1) {
-        const relativeDate = new Intl.DateTimeFormat(
-            navigator.language,
-            {
-                numeric: 'auto',
-            }.format(differenceInDays, 'day'),
-        )
-
-        return `${relativeDate}, ${formattedDate}`;
-    }
-
-    return new Intl.DateTimeFormat(
         navigator.language,
         {
             weekday: 'long',
@@ -140,13 +111,23 @@ export const formatWeatherDate = (weatherDate) => {
             month: 'long',
         }
     ).format(date);
+
+    if (targetDate.getTime() === today.getTime()) {
+        return `${t('today')}, ${formattedDate}`;
+    }
+
+    if (targetDate.getTime() === tomorrow.getTime()) {
+        return `${t('tomorrow')}, ${formattedDate}`;
+    }
+
+    return formattedDate;
 };
 
 export const isHighlightedDay = (weatherDate) => {
     const date = new Date(`${weatherDate}T12:00:00`);
     const day = date.getDay();
 
-    return day === 6 || day === 7; // pro barveni weekendu
+    return day === 0 || day === 6; // pro barveni weekendu
 }
 
 export const getWeatherIconUrl = (icon) => {
