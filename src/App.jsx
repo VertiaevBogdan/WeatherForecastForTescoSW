@@ -27,13 +27,16 @@ export default function App() {
       <header className="wrapper header-margin">
         <Search
             onCitySelect={handleCitySelect}
-            selectedCity={selectedCity}/>
+            selectedCity={selectedCity}
+        />
       </header>
       <main className="wrapper">
           <div className="accent-info">
-              <h1 className="forecast-card__title">
-                  5-day forecast for {selectedCity.name}, {selectedCity.country}
-              </h1>
+              {selectedCity && (
+                  <h1 className="forecast-card__title">
+                      5-day forecast for {selectedCity.name}, {selectedCity.country}
+                  </h1>
+              )}
           </div>
             <ForecastDisplay forecast={weather}/>
       </main>
