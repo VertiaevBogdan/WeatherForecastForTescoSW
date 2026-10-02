@@ -1,5 +1,6 @@
 import {useState, useRef, useEffect} from "react";
 import {searchCities} from "../utils/cityUtils.js";
+import { t } from '../utils/translationsUtils.js';
 
 export default function Search({ onCitySelect, selectedCity, onFindMe }) {
 
@@ -126,14 +127,13 @@ export default function Search({ onCitySelect, selectedCity, onFindMe }) {
                     onChange={handleChange}
                     onClick={handleClick}
                     onKeyDown={handleKeyDown}
-                    placeholder="Search city"
-                />
+                    placeholder={t('searchCity')}                />
                 <button
                     className="btn"
                     type="button"
                     onClick={handleFindMeClick}
                 >
-                    Find me
+                    {t('findMe')}
                 </button>
             </nav>
 
@@ -146,8 +146,7 @@ export default function Search({ onCitySelect, selectedCity, onFindMe }) {
                             onClick={() => setIsSuggestionsOpen(false)}
                         >
                             <div className="search__suggestion">
-                                Current: {selectedCity.name}, {selectedCity.country}
-                            </div>
+                                {t('current')}: {selectedCity.name}, {selectedCity.country}                            </div>
                         </div>
                     )}
 
