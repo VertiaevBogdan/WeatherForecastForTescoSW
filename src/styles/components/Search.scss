@@ -1,6 +1,10 @@
 @use '../mixins' as *;
 @use '../variables' as *;
 
+.search {
+  position: relative;
+}
+
 .search__input {
   border: .0625em solid $primary-border-color;
   background: $input-background-color;
@@ -21,14 +25,23 @@
 
   gap: 1em;
 }
+
 .search__suggestions {
+  background: $input-background-color;
   @include base-radius;
 
   font-weight: bold;
 
   padding: .5em 1em;
 
+  width: 100%;
+
   cursor: pointer;
+
+  position: absolute;
+  z-index: 3;
+  top: 100%;
+  left: 0;
 }
 
 .search__suggestion {
