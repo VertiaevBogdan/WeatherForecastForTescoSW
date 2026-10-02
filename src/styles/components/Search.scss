@@ -50,8 +50,10 @@
   @include base-radius;
 
   padding: .75em;
+  cursor: pointer;
 
-  &:hover{
+  &:hover,
+  &--active{
     background: $background-default-hovered;
   }
 }

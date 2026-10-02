@@ -7,6 +7,7 @@ export default function Search({ onCitySelect, selectedCity }) {
     const [suggestions, setSuggestions] = useState([]);
     const [isSuggestionsOpen, setIsSuggestionsOpen] = useState(false);
     const searchRef = useRef(null);
+    const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1); // pro ovladani , -1 znamena, ze zadna varianta neni zvolena
 
     const handleClick = () => {
         setQuery('');
@@ -14,11 +15,51 @@ export default function Search({ onCitySelect, selectedCity }) {
         setIsSuggestionsOpen(true);
     }
 
-    const handleKeyDown = (e) => {
-        if (e.key === 'Escape') {
+    const handleKeyDown = (event) => {
+        if (event.key === 'Escape') {
             setIsSuggestionsOpen(false);
+            setActiveSuggestionIndex(-1);
+            return;
         }
-    }
+
+        if (event.key === 'ArrowDown') {
+            event.preventDefault();
+
+            if (suggestions.length === 0) return;
+
+            setActiveSuggestionIndex((currentIndex) =>
+                currentIndex >= suggestions.length - 1
+                    ? 0
+                    : currentIndex + 1
+            );
+
+            return;
+        }
+
+        if (event.key === 'ArrowUp') {
+            event.preventDefault();
+
+            if (suggestions.length === 0) return;
+
+            setActiveSuggestionIndex((currentIndex) =>
+                currentIndex <= 0
+                    ? suggestions.length - 1
+                    : currentIndex - 1
+            );
+
+            return;
+        }
+
+        if (event.key === 'Enter') {
+            event.preventDefault();
+
+            if (activeSuggestionIndex === -1) return;
+
+            handleCitySelect(
+                suggestions[activeSuggestionIndex]
+            );
+        }
+    };
 
     const handleChange = (event) => {
         const value = event.target.value;
@@ -26,12 +67,14 @@ export default function Search({ onCitySelect, selectedCity }) {
         setQuery(value);
         setSuggestions(searchCities(value));
         setIsSuggestionsOpen(true);
+        setActiveSuggestionIndex(-1);
     };
 
     const handleCitySelect = (city) => {
         setQuery(`${city.name}, ${city.country}`);
         setSuggestions([]);
         setIsSuggestionsOpen(false);
+        setActiveSuggestionIndex(-1);
 
         onCitySelect(city);
     };
@@ -66,7 +109,6 @@ export default function Search({ onCitySelect, selectedCity }) {
                     value={query}
                     onChange={handleChange}
                     onClick={handleClick}
-
                     onKeyDown={handleKeyDown}
                     placeholder="Search city"
                 />
@@ -95,9 +137,13 @@ export default function Search({ onCitySelect, selectedCity }) {
 
                     {query && suggestions.length > 0 && (
                         <ul className="search__suggestions">
-                            {suggestions.map((city) => (
+                            {suggestions.map((city, index) => (
                                 <li
-                                    className="search__suggestion"
+                                    className={
+                                        index === activeSuggestionIndex
+                                            ? 'search__suggestion search__suggestion--active'
+                                            : 'search__suggestion'
+                                    }
                                     key={city.id}
                                     onClick={() => handleCitySelect(city)}
                                 >
