@@ -1,0 +1,52 @@
+@use '../mixins' as *;
+@use '../variables' as *;
+
+.forecast-period {
+  min-height: 4.5em;
+
+  border-top: .0625em solid $primary-border-color;
+}
+
+.forecast-period__name {
+  font-weight: 600;
+}
+
+.forecast-period__weather {
+  display: flex;
+  align-items: center;
+  gap: .75em;
+}
+
+.forecast-period__temperature {
+  min-width: 2.5em;
+
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.forecast-period__icon {
+  max-width: 3em;
+  max-height: 3em;
+
+  object-fit: contain;
+}
+
+.forecast-period__description {
+  color: $secondary-text-color;
+
+  text-transform: capitalize;
+}
+
+.forecast-period__feels-like,
+.forecast-period__wind,
+.forecast-period__humidity,
+.forecast-period__pressure {
+  font-size: .9375rem;
+  color: $primary-text-color;
+}
+
+@media (max-width: 60em) {
+  .forecast-period {
+    min-width: 48em;
+  }
+}

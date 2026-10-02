@@ -33,7 +33,6 @@ export default function App() {
         }
     }
 
-
   return (
     <>
       <header className="wrapper header-margin">

@@ -1,0 +1,12 @@
+@use '../mixins' as *;
+@use '../variables' as *;
+
+@media (max-width: 60em) {
+  .forecast-day__weather {
+    overflow-x: auto;
+  }
+
+  .forecast-day__header {
+    min-width: 48em;
+  }
+}
