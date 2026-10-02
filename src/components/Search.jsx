@@ -62,7 +62,10 @@ export default function Search({ onCitySelect, selectedCity }) {
                     onClick={handleClick}
                     placeholder="Search city"
                 />
-                <button className="btn">
+                <button
+                    className="btn"
+                    type="button"
+                >
                     Find me
                 </button>
             </nav>

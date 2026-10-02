@@ -20,7 +20,7 @@ export default function ForecastDay({ day }) {
                     <div>Feels like</div>
                     <div>Wind</div>
                     <div>Humidity</div>
-                    <div>Pressure</div>
+                    <div>Pressure - hPa</div>
                 </div>
 
                 <div className="forecast-day__periods">
