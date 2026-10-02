@@ -1,33 +1,92 @@
+const getDayPeriod = (hour) => {
+    if (hour >= 6 && hour < 12) {
+        return 'morning';
+    }
+
+    if (hour >= 12 && hour < 18) {
+        return 'day';
+    }
+
+    if (hour >= 18 && hour < 24) {
+        return 'evening';
+    }
+
+    return 'night';
+};
+
+const periodTargetHours = {
+    night: 3,
+    morning: 9,
+    day: 15,
+    evening: 21,
+};
+
+const transformWeatherItem = (item) => {
+    return {
+        time: item.dt_txt.split(' ')[1],
+        temp: item.main.temp,
+        feelsLike: item.main.feels_like,
+        description: item.weather[0].description,
+        icon: item.weather[0].icon,
+        humidity: item.main.humidity,
+        pressure: item.main.pressure,
+        windSpeed: item.wind.speed,
+    };
+};
+
 export const transformWeatherData = (weatherData) => {
   const days = {};
 
     weatherData.list.forEach((item) => {
-      const date = item.dt_txt.split(' ')[0];
+      const [date, time] = item.dt_txt.split(' ')[0];
+      const hour = Number(time.split(';')[0]);
+      const period = getDayPeriod(hour);
 
       if (!days[date]) {
           days[date] = {
               date,
-              minTemp: item.main.temp_min,
-              maxTemp: item.main.temp_max,
-              description: item.weather[0].description,
-              icon: item.weather[0].icon,
+              periods: {},
+          };
+      }
+
+      const currentPeriod = days[date].periods[period];
+      const targetHour = periodTargetHours[period];
+
+      if (!currentPeriod) {
+          days[date].periods[period] = {
+              ...transformWeatherItem(item),
+              hour,
           };
 
           return;
       }
 
-      days[date].minTemp = Math.min(
-          days[date].minTemp,
-          item.main.temp_min,
-      )
+      const currentDifference = Math.abs(
+          currentPeriod.hour - targetHour
+      );
 
-      days[date].maxTemp = Math.max(
-          days[date].maxTemp,
-          item.main.temp_max,
-      )
+      const newDifference = Math.abs(
+          hour - targetHour
+      );
+
+        if (newDifference < currentDifference) {
+            days[date].periods[period] = {
+                ...transformWeatherItem(item),
+                hour,
+            };
+        }
   });
 
-  return Object.values(days).slice(0, 5);
+    const forecastDays = Object.values(days);
+
+    const firstDay = forecastDays[0];
+    const firstForecastItem = weatherData.list[0];
+
+    if (firstDay && firstForecastItem) {
+        firstDay.now = transformWeatherItem(firstForecastItem);
+    }
+
+    return forecastDays.slice(0, 5);
 };
 
 export const formatWeatherDate = (weatherDate) => {
