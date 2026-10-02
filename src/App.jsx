@@ -26,7 +26,7 @@ export default function App() {
             setWeather(forecast)
         } catch (error) {
             console.error(error);
-            setError('Failed to load data' + error);
+            setError('Failed to load data ' + error);
             setWeather(null);
         } finally {
             setIsLoading(false);
@@ -49,8 +49,22 @@ export default function App() {
                       5-day forecast for {selectedCity.name}, {selectedCity.country}
                   </h1>
               )}
+
+              {isLoading && (
+                  <p className="forecast__status">
+                      Loading weather...
+                  </p>
+              )}
+
+              {error && (
+                  <p className="forecast__error">
+                      {error}
+                  </p>
+              )}
           </div>
-            <ForecastDisplay forecast={weather}/>
+              {!isLoading && !error && (
+                  <ForecastDisplay forecast={weather} />
+              )}
       </main>
       <footer></footer>
     </>
