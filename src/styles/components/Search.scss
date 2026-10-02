@@ -57,3 +57,13 @@
     background: $background-default-hovered;
   }
 }
+
+@media (max-width: 48em) {
+  .search__nav {
+    gap: .5em;
+  }
+
+  .search__input {
+    min-width: 0;
+  }
+}
