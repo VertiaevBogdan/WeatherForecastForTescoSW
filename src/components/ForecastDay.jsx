@@ -1,5 +1,7 @@
 import ForecastPeriod from "./ForecastPeriod.jsx";
 import {isHighlightedDay, formatWeatherDate} from "../utils/weatherUtils.js";
+import { t } from '../utils/translationsUtils.js';
+
 
 export default function ForecastDay({ day }) {
 
@@ -15,40 +17,40 @@ export default function ForecastDay({ day }) {
                 </h2>
 
                 <div className="forecast-day__header">
-                    <div>Time</div>
-                    <div>Weather</div>
-                    <div>Feels like</div>
-                    <div>Wind</div>
-                    <div>Humidity</div>
-                    <div>Pressure - hPa</div>
+                    <div>{t('time')}</div>
+                    <div>{t('weather')}</div>
+                    <div>{t('feelsLike')}</div>
+                    <div>{t('wind')}</div>
+                    <div>{t('humidity')}</div>
+                    <div>{t('pressure')} - hPa</div>
                 </div>
 
                 <div className="forecast-day__periods">
 
                     {day.now && (
                         <ForecastPeriod
-                            name="Now"
+                            name={t('now')}
                             weather={day.now}
                         />
                     )}
 
                     <ForecastPeriod
-                        name="Morning"
+                        name={t('morning')}
                         weather={day.periods.morning}
                     />
 
                     <ForecastPeriod
-                        name="Day"
+                        name={t('day')}
                         weather={day.periods.day}
                     />
 
                     <ForecastPeriod
-                        name="Evening"
+                        name={t('evening')}
                         weather={day.periods.evening}
                     />
 
                     <ForecastPeriod
-                        name="Night"
+                        name={t('night')}
                         weather={day.periods.night}
                     />
                 </div>

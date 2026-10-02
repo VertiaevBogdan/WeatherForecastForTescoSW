@@ -1,4 +1,5 @@
 import { getWeatherIconUrl } from '../utils/weatherUtils.js';
+import {translateWeather} from "../utils/translationsUtils.js";
 
 export default function ForecastPeriod({ name, weather }) {
     if (!weather) return null;
@@ -17,11 +18,11 @@ export default function ForecastPeriod({ name, weather }) {
                 <img
                     className="forecast-period__icon"
                     src={getWeatherIconUrl(weather.icon)}
-                    alt={weather.description}
+                    alt={translateWeather(weather.description)}
                 />
 
                 <span className="forecast-period__description">
-                    {weather.description}
+                    {translateWeather(weather.description)}
                 </span>
             </div>
 
