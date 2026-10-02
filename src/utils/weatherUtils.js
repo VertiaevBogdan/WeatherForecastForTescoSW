@@ -90,14 +90,49 @@ export const transformWeatherData = (weatherData) => {
 };
 
 export const formatWeatherDate = (weatherDate) => {
-    return new Intl.DateTimeFormat(
-        navigator.language, {
-            weekday: 'short',
+    const date = new Date(`${weatherDate}T12:00:00`);
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const targetDate = new Date(date);
+    targetDate.setHours(0, 0, 0, 0);
+
+    const formattedDate = new Intl.DateTimeFormat(
+        navigator.language,
+        {
             day: 'numeric',
-            month: 'short',
+            month: 'long',
         }
-    ).format(new Date(`${weatherDate}T12:00:00`));
+    ).format(date);
+
+    if (targetDate.getTime() === today.getTime()) {
+        return `Today, ${formattedDate}`;
+    }
+
+    if (targetDate.getTime() === tomorrow.getTime()) {
+        return `Tomorrow, ${formattedDate}`;
+    }
+
+    return new Intl.DateTimeFormat(
+        navigator.language,
+        {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+        }
+    ).format(date);
 };
+
+export const isHighlightedDay = (weatherDate) => {
+    const date = new Date(`${weatherDate}T12:00:00`);
+    const day = date.getDay();
+
+    return day === 6 || day === 7; // pro barveni weekendu
+}
 
 export const getWeatherIconUrl = (icon) => {
     return `https://openweathermap.org/img/wn/${icon}@2x.png`;
