@@ -38,8 +38,8 @@ export const transformWeatherData = (weatherData) => {
   const days = {};
 
     weatherData.list.forEach((item) => {
-      const [date, time] = item.dt_txt.split(' ')[0];
-      const hour = Number(time.split(';')[0]);
+      const [date, time] = item.dt_txt.split(' ');
+      const hour = Number(time.split(':')[0]);
       const period = getDayPeriod(hour);
 
       if (!days[date]) {
