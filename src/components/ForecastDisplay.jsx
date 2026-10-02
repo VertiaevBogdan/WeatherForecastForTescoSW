@@ -1,4 +1,4 @@
-import { formatWeatherDate } from '../utils/weatherUtils.js';
+import { formatWeatherDate, getWeatherIconUrl } from '../utils/weatherUtils.js';
 
 export default function ForecastDisplay({ forecast }) {
     const MOCK_DETAILS = {
@@ -40,7 +40,7 @@ export default function ForecastDisplay({ forecast }) {
 
                           <img
                               className="forecast-card__icon"
-                              src={`https://openweathermap.org/img/wn/${day.icon}@2x.png`}
+                              src={getWeatherIconUrl(day.icon)}
                               alt={day.description}
                           />
 

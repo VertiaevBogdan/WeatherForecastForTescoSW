@@ -39,3 +39,7 @@ export const formatWeatherDate = (weatherDate) => {
         }
     ).format(new Date(`${weatherDate}T12:00:00`));
 };
+
+export const getWeatherIconUrl = (icon) => {
+    return `https://openweathermap.org/img/wn/${icon}@2x.png`;
+};
