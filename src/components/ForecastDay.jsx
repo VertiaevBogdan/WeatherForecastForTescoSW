@@ -11,12 +11,12 @@ export default function ForecastDay({ day }) {
 
     return (
         <article className="forecast-day">
-            <section className="forecast-day__weather">
+            <div className="forecast-day__weather">
                 <h2 className={titleClassName}>
                     {formatWeatherDate(day.date)}
                 </h2>
 
-                <div className="forecast-day__header">
+                <div className="forecast-day__table">
                     <div>{t('time')}</div>
                     <div>{t('weather')}</div>
                     <div>{t('feelsLike')}</div>
@@ -54,7 +54,7 @@ export default function ForecastDay({ day }) {
                         weather={day.periods.night}
                     />
                 </div>
-            </section>
+            </div>
         </article>
     )
 };

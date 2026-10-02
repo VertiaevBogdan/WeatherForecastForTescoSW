@@ -89,7 +89,7 @@ export default function App() {
         />
       </header>
       <main className="wrapper">
-          <div className="accent-info">
+          <section className="accent-info">
               {selectedCity ? (
                       <h1 className="forecast-card__title">
                           {t('forecast')} {selectedCity.name}, {selectedCity.country}
@@ -107,22 +107,27 @@ export default function App() {
                   )}
 
               {isLoading && (
-                  <p className="forecast__status">
+                  <p
+                      className="forecast__status"
+                      role="status"
+                  >
                       {t('loading')}
                   </p>
               )}
 
               {error && (
-                  <p className="forecast__error">
+                  <p
+                      className="forecast__error"
+                      role="alert"
+                  >
                       {error}
                   </p>
               )}
-          </div>
+          </section>
               {!isLoading && !error && (
                   <ForecastDisplay forecast={weather} />
               )}
       </main>
-      <footer></footer>
     </>
   )
 }
