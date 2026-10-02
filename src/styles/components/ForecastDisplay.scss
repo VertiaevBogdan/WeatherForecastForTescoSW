@@ -108,6 +108,11 @@
   flex-direction: column;
   gap: 1em;
 
+  position: relative;
+  z-index: 2;
+
+  margin-top: -3em;
+
   width: 100%;
 }
 
@@ -123,6 +128,7 @@
 
 .forecast-day__weather {
   padding: 1.5em;
+
 }
 
 .forecast-day__title {
