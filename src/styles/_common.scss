@@ -1,5 +1,65 @@
+@use './mixins' as *;
 @use './variables' as *;
+
+.wrapper {
+  max-width: 62.5em;
+  @include flex-column;
+
+  margin: 0 auto;
+}
+
+.accent-title{
+  font-weight: bold;
+  font-size: 1.5em;
+  color: $primary-text-color;
+}
 
 body {
   background: $primary-background-color;
+  color: $primary-text-color;
+  font-size: 16px;
+}
+
+h2, h3, h4, h5, h6 {
+  min-width: 4.375em;
+  min-height: 1.875em;
+
+  font-weight: normal;
+  font-size: 1em;
+
+  line-height: .875em;
+  color: $secondary-text-color;
+}
+
+.accent-info {
+  background: $accent-info-background-color;
+  border-radius: 1.5em 1.5em 0 0;
+
+  position: relative;
+  z-index: 1;
+
+  @include base-padding-top;
+}
+
+.header-margin {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.btn {
+  @include interactive-element-radius;
+  background: $button-background-color;
+  color: $primary-text-color;
+
+
+  font-weight: bold;
+
+  min-width: 9.5em;
+
+  padding: .75em 1em;
+  margin-left: 0;
+
+  &:hover {
+    background: $button-background-color-hovered;
+  }
 }

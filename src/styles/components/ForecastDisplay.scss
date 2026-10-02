@@ -1,0 +1,102 @@
+@use '../mixins' as *;
+@use '../variables' as *;
+
+.forecast-day-container {
+  @include flex-column;
+  background: $secondary-background-color;
+  min-width: 62.5em;
+
+  @include base-padding;
+  @include base-radius;
+}
+
+.forecast-day-container__item {
+
+}
+
+.forecast-card {
+  position: relative;
+  z-index: 2;
+
+  margin-top: -3em;
+
+  width: 100%;
+  padding: 1.5em 1.875em;
+  border-radius: 1.75em;
+  background: $secondary-background-color;
+  color: #ffffff;
+
+  &__title {
+    margin: 0 0 1.5em;
+    font-size: 1.75em;
+    font-weight: 500;
+  }
+
+  &__table {
+    width: 100%;
+  }
+
+  &__header,
+  &__day {
+    display: grid;
+    grid-template-columns:
+            9.375em
+            minmax(16.25em, 1fr)
+            8.125em
+            8.75em
+            7.5em
+            10em;
+
+    align-items: center;
+  }
+
+  &__header {
+    padding: 0 0 0.75em;
+
+    color: #8f8f8f;
+    font-size: 0.875em;
+    font-weight: 400;
+  }
+
+  &__day {
+    min-height: 5.5em;
+    border-top: 0.0625em solid #292929;
+
+    font-size: 1em;
+  }
+
+  &__date {
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  &__weather {
+    display: flex;
+    align-items: center;
+    gap: 0.625em;
+  }
+
+  &__temperature {
+    min-width: 3.125em;
+
+    font-size: 1.375em;
+    font-weight: 500;
+  }
+
+  &__icon {
+    width: 2.625em;
+    height: 2.625em;
+  }
+
+  &__description {
+    color: #b7b7b7;
+    line-height: 1.25;
+  }
+
+  &__feels-like,
+  &__wind,
+  &__humidity,
+  &__pressure {
+    color: #d5d5d5;
+  }
+}
