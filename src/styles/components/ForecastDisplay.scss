@@ -9,7 +9,7 @@
   position: relative;
   z-index: 2;
 
-  margin-top: -3em;
+  margin-top: -1em;
 
   width: 100%;
 }
@@ -65,10 +65,6 @@
 }
 
 @media (max-width: 48em) {
-  .forecast {
-    margin-top: -1em;
-  }
-
   .forecast-day__weather {
     padding: 1em;
     overflow-x: auto;

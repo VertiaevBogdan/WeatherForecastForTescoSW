@@ -89,10 +89,21 @@ export default function App() {
       </header>
       <main className="wrapper">
           <div className="accent-info">
-              {selectedCity && (
-                  <h1 className="forecast-card__title">
-                      {t('forecast')} {selectedCity.name}, {selectedCity.country}                  </h1>
-              )}
+              {selectedCity ? (
+                      <h1 className="forecast-card__title">
+                          {t('forecast')} {selectedCity.name}, {selectedCity.country}
+                      </h1>
+                  ) : (
+                      <div className="accent-info__empty">
+                          <h1 className="accent-info__title">
+                              {t('welcomeTitle')}
+                          </h1>
+
+                          <p className="accent-info__text">
+                              {t('welcomeText')}
+                          </p>
+                      </div>
+                  )}
 
               {isLoading && (
                   <p className="forecast__status">
