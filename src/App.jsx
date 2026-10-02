@@ -82,6 +82,7 @@ export default function App() {
     <>
       <header className="wrapper header-margin">
         <Search
+            key={selectedCity?.id ?? 'empty'}
             onCitySelect={handleCitySelect}
             selectedCity={selectedCity}
             onFindMe={handleFindMe}
