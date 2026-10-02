@@ -23,6 +23,8 @@ export default function App() {
 
             const forecast = transformWeatherData(data);
             setWeather(forecast)
+
+            return data;
         } catch (error) {
             console.error(error);
             setError('Failed to load data ' + error);
@@ -41,12 +43,46 @@ export default function App() {
         );
     }
 
+    const handleFindMe = () => {
+        if (!navigator.geolocation) {
+            setError('Geolocation is not supported by your browser');
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const { latitude, longitude } = position.coords;
+
+                const data = await loadWeather(latitude, longitude);
+
+                if (!data) return;
+
+                const currentCity = {
+                    id: data.city.id,
+                    name: data.city.name,
+                    country: data.city.country,
+                    coord: {
+                        lat: latitude,
+                        lon: longitude,
+                    },
+                };
+
+                setSelectedCity(currentCity);
+            },
+            (error) => {
+                console.error(error);
+                setError('Unable to get your location');
+            }
+        );
+    };
+
   return (
     <>
       <header className="wrapper header-margin">
         <Search
             onCitySelect={handleCitySelect}
             selectedCity={selectedCity}
+            onFindMe={handleFindMe}
         />
       </header>
       <main className="wrapper">

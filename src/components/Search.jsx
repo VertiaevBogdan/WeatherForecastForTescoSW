@@ -1,13 +1,29 @@
 import {useState, useRef, useEffect} from "react";
 import {searchCities} from "../utils/cityUtils.js";
 
-export default function Search({ onCitySelect, selectedCity }) {
+export default function Search({ onCitySelect, selectedCity, onFindMe }) {
 
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [isSuggestionsOpen, setIsSuggestionsOpen] = useState(false);
     const searchRef = useRef(null);
     const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1); // pro ovladani , -1 znamena, ze zadna varianta neni zvolena
+
+    useEffect(() => {
+        if (selectedCity) {
+            setQuery(
+                `${selectedCity.name}, ${selectedCity.country}`
+            );
+        }
+    }, [selectedCity]);
+
+    const handleFindMeClick = () => {
+        setIsSuggestionsOpen(false);
+        setSuggestions([]);
+        setActiveSuggestionIndex(-1);
+
+        onFindMe();
+    };
 
     const handleClick = () => {
         setQuery('');
@@ -115,7 +131,7 @@ export default function Search({ onCitySelect, selectedCity }) {
                 <button
                     className="btn"
                     type="button"
-                    // onClick={onFindMe}
+                    onClick={handleFindMeClick}
                 >
                     Find me
                 </button>
