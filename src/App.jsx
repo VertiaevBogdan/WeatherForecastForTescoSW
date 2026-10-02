@@ -11,19 +11,20 @@ export default function App() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const handleCitySelect = async (city) => {
-        setSelectedCity(city);
+    const loadWeather = async (lat, lon) => {
         setIsLoading(true);
         setError(null);
 
         try {
             const data = await getWeather(
-                city.coord.lat,
-                city.coord.lon,
+                lat,
+                lon,
             );
 
             const forecast = transformWeatherData(data);
             setWeather(forecast)
+
+            return data;
         } catch (error) {
             console.error(error);
             setError('Failed to load data ' + error);
@@ -31,7 +32,49 @@ export default function App() {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const handleCitySelect = async (city) => {
+        setSelectedCity(city);
+
+        await loadWeather(
+            city.coord.lat,
+            city.coord.lon
+        );
     }
+
+    const handleFindMe = () => {
+        if (!navigator.geolocation) {
+            setError('Geolocation is not supported by your browser');
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const { latitude, longitude } = position.coords;
+
+                const data = await loadWeather(latitude, longitude);
+
+                if (!data) return;
+
+                const currentCity = {
+                    id: data.city.id,
+                    name: data.city.name,
+                    country: data.city.country,
+                    coord: {
+                        lat: latitude,
+                        lon: longitude,
+                    },
+                };
+
+                setSelectedCity(currentCity);
+            },
+            (error) => {
+                console.error(error);
+                setError('Unable to get your location');
+            }
+        );
+    };
 
   return (
     <>
@@ -39,6 +82,7 @@ export default function App() {
         <Search
             onCitySelect={handleCitySelect}
             selectedCity={selectedCity}
+            onFindMe={handleFindMe}
         />
       </header>
       <main className="wrapper">

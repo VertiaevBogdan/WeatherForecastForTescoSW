@@ -1,12 +1,29 @@
 import {useState, useRef, useEffect} from "react";
 import {searchCities} from "../utils/cityUtils.js";
 
-export default function Search({ onCitySelect, selectedCity }) {
+export default function Search({ onCitySelect, selectedCity, onFindMe }) {
 
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [isSuggestionsOpen, setIsSuggestionsOpen] = useState(false);
     const searchRef = useRef(null);
+    const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1); // pro ovladani , -1 znamena, ze zadna varianta neni zvolena
+
+    useEffect(() => {
+        if (selectedCity) {
+            setQuery(
+                `${selectedCity.name}, ${selectedCity.country}`
+            );
+        }
+    }, [selectedCity]);
+
+    const handleFindMeClick = () => {
+        setIsSuggestionsOpen(false);
+        setSuggestions([]);
+        setActiveSuggestionIndex(-1);
+
+        onFindMe();
+    };
 
     const handleClick = () => {
         setQuery('');
@@ -14,18 +31,66 @@ export default function Search({ onCitySelect, selectedCity }) {
         setIsSuggestionsOpen(true);
     }
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Escape') {
+            setIsSuggestionsOpen(false);
+            setActiveSuggestionIndex(-1);
+            return;
+        }
+
+        if (event.key === 'ArrowDown') {
+            event.preventDefault();
+
+            if (suggestions.length === 0) return;
+
+            setActiveSuggestionIndex((currentIndex) =>
+                currentIndex >= suggestions.length - 1
+                    ? 0
+                    : currentIndex + 1
+            );
+
+            return;
+        }
+
+        if (event.key === 'ArrowUp') {
+            event.preventDefault();
+
+            if (suggestions.length === 0) return;
+
+            setActiveSuggestionIndex((currentIndex) =>
+                currentIndex <= 0
+                    ? suggestions.length - 1
+                    : currentIndex - 1
+            );
+
+            return;
+        }
+
+        if (event.key === 'Enter') {
+            event.preventDefault();
+
+            if (activeSuggestionIndex === -1) return;
+
+            handleCitySelect(
+                suggestions[activeSuggestionIndex]
+            );
+        }
+    };
+
     const handleChange = (event) => {
         const value = event.target.value;
 
         setQuery(value);
         setSuggestions(searchCities(value));
         setIsSuggestionsOpen(true);
+        setActiveSuggestionIndex(-1);
     };
 
     const handleCitySelect = (city) => {
         setQuery(`${city.name}, ${city.country}`);
         setSuggestions([]);
         setIsSuggestionsOpen(false);
+        setActiveSuggestionIndex(-1);
 
         onCitySelect(city);
     };
@@ -60,11 +125,13 @@ export default function Search({ onCitySelect, selectedCity }) {
                     value={query}
                     onChange={handleChange}
                     onClick={handleClick}
+                    onKeyDown={handleKeyDown}
                     placeholder="Search city"
                 />
                 <button
                     className="btn"
                     type="button"
+                    onClick={handleFindMeClick}
                 >
                     Find me
                 </button>
@@ -86,9 +153,13 @@ export default function Search({ onCitySelect, selectedCity }) {
 
                     {query && suggestions.length > 0 && (
                         <ul className="search__suggestions">
-                            {suggestions.map((city) => (
+                            {suggestions.map((city, index) => (
                                 <li
-                                    className="search__suggestion"
+                                    className={
+                                        index === activeSuggestionIndex
+                                            ? 'search__suggestion search__suggestion--active'
+                                            : 'search__suggestion'
+                                    }
                                     key={city.id}
                                     onClick={() => handleCitySelect(city)}
                                 >
