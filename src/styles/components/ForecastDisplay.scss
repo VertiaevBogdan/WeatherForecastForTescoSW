@@ -100,3 +100,63 @@
     color: #d5d5d5;
   }
 }
+
+//---
+
+.forecast {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  width: 100%;
+}
+
+.forecast-day {
+  display: grid;
+
+  background: $input-background-color;
+
+  @include base-radius;
+
+  overflow: hidden;
+}
+
+.forecast-day__weather {
+  padding: 1.5em;
+}
+
+.forecast-day__title {
+  margin: 0 0 1.5em;
+
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $primary-text-color;
+}
+
+.forecast-day__title--highlighted {
+  color: $weekend-text-color;
+}
+
+.forecast-day__header,
+.forecast-period {
+  display: grid;
+
+  grid-template-columns:
+    6em
+    minmax(14em, 2fr)
+    minmax(6em, 1fr)
+    minmax(7em, 1fr)
+    minmax(6em, 1fr)
+    minmax(6em, 1fr);
+
+  column-gap: 1em;
+
+  align-items: center;
+}
+
+.forecast-day__header {
+  padding-bottom: .75em;
+
+  color: $secondary-text-color;
+  font-size: .875rem;
+}
