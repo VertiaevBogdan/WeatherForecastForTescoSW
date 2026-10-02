@@ -14,6 +14,12 @@ export default function Search({ onCitySelect, selectedCity }) {
         setIsSuggestionsOpen(true);
     }
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Escape') {
+            setIsSuggestionsOpen(false);
+        }
+    }
+
     const handleChange = (event) => {
         const value = event.target.value;
 
@@ -60,11 +66,14 @@ export default function Search({ onCitySelect, selectedCity }) {
                     value={query}
                     onChange={handleChange}
                     onClick={handleClick}
+
+                    onKeyDown={handleKeyDown}
                     placeholder="Search city"
                 />
                 <button
                     className="btn"
                     type="button"
+                    // onClick={onFindMe}
                 >
                     Find me
                 </button>
