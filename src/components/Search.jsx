@@ -54,9 +54,6 @@ export default function Search({ onCitySelect, selectedCity }) {
             ref={searchRef}
         >
             <nav className="search__nav">
-                <button className="btn">
-                    Find me
-                </button>
                 <input
                     type="text"
                     className="search__input"
@@ -65,8 +62,11 @@ export default function Search({ onCitySelect, selectedCity }) {
                     onClick={handleClick}
                     placeholder="Search city"
                 />
-                <button className="btn">
-                    second btn
+                <button
+                    className="btn"
+                    type="button"
+                >
+                    Find me
                 </button>
             </nav>
 
