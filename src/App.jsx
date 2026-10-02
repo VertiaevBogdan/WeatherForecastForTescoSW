@@ -11,15 +11,14 @@ export default function App() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const handleCitySelect = async (city) => {
-        setSelectedCity(city);
+    const loadWeather = async (lat, lon) => {
         setIsLoading(true);
         setError(null);
 
         try {
             const data = await getWeather(
-                city.coord.lat,
-                city.coord.lon,
+                lat,
+                lon,
             );
 
             const forecast = transformWeatherData(data);
@@ -31,6 +30,15 @@ export default function App() {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const handleCitySelect = async (city) => {
+        setSelectedCity(city);
+
+        await loadWeather(
+            city.coord.lat,
+            city.coord.lon
+        );
     }
 
   return (
