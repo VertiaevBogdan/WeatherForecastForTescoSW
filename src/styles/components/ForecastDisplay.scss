@@ -40,7 +40,7 @@
   color: $weekend-text-color;
 }
 
-.forecast-day__header,
+.forecast-day__table,
 .forecast-period {
   display: grid;
 
@@ -57,7 +57,7 @@
   align-items: center;
 }
 
-.forecast-day__header {
+.forecast-day__table {
   padding-bottom: .75em;
 
   color: $secondary-text-color;
@@ -70,7 +70,7 @@
     overflow-x: auto;
   }
 
-  .forecast-day__header,
+  .forecast-day__table,
   .forecast-period {
     grid-template-columns:
       5em

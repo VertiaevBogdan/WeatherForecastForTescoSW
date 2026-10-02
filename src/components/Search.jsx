@@ -114,8 +114,9 @@ export default function Search({ onCitySelect, selectedCity, onFindMe }) {
         <form
             className="search"
             ref={searchRef}
+            role="search"
         >
-            <nav className="search__nav">
+            <div className="search__controls">
                 <input
                     type="text"
                     className="search__input"
@@ -123,7 +124,8 @@ export default function Search({ onCitySelect, selectedCity, onFindMe }) {
                     onChange={handleChange}
                     onClick={handleClick}
                     onKeyDown={handleKeyDown}
-                    placeholder={t('searchCity')}                />
+                    placeholder={t('searchCity')}
+                />
                 <button
                     className="btn"
                     type="button"
@@ -131,10 +133,13 @@ export default function Search({ onCitySelect, selectedCity, onFindMe }) {
                 >
                     {t('findMe')}
                 </button>
-            </nav>
+            </div>
 
-            {isSuggestionsOpen && (
-                <div className="search__dropdown">
+                <div className={
+                         isSuggestionsOpen
+                             ? 'search__dropdown search__dropdown--open'
+                             : 'search__dropdown'
+                     }>
 
                     {!query && selectedCity && (
                         <div
@@ -165,7 +170,6 @@ export default function Search({ onCitySelect, selectedCity, onFindMe }) {
                     )}
 
                 </div>
-            )}
         </form>
     );
 
