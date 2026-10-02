@@ -1,3 +1,5 @@
+import { formatWeatherDate } from '../utils/weatherUtils.js';
+
 export default function ForecastDisplay({ forecast }) {
     const MOCK_DETAILS = {
         feelsLike: 11,
@@ -28,7 +30,7 @@ export default function ForecastDisplay({ forecast }) {
                       key={day.date}
                   >
                       <div className="forecast-card__date">
-                          {day.date}
+                          {formatWeatherDate(day.date)}
                       </div>
 
                       <div className="forecast-card__weather">

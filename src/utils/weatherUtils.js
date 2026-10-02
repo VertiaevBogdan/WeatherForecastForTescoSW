@@ -29,3 +29,13 @@ export const transformWeatherData = (weatherData) => {
 
   return Object.values(days).slice(0, 5);
 };
+
+export const formatWeatherDate = (weatherDate) => {
+    return new Intl.DateTimeFormat(
+        navigator.language, {
+            weekday: 'short',
+            day: 'numeric',
+            month: 'short',
+        }
+    ).format(new Date(`${weatherDate}T12:00:00`));
+};
