@@ -101,6 +101,10 @@ export const formatWeatherDate = (weatherDate) => {
     const targetDate = new Date(date);
     targetDate.setHours(0, 0, 0, 0);
 
+    const differenceInDays = Math.round(
+        (targetDate - today) / (1000 * 60 * 60 * 24),
+    )
+
     const formattedDate = new Intl.DateTimeFormat(
         navigator.language,
         {
@@ -115,6 +119,17 @@ export const formatWeatherDate = (weatherDate) => {
 
     if (targetDate.getTime() === tomorrow.getTime()) {
         return `Tomorrow, ${formattedDate}`;
+    }
+
+    if (differenceInDays === 0 || differenceInDays === 1) {
+        const relativeDate = new Intl.DateTimeFormat(
+            navigator.language,
+            {
+                numeric: 'auto',
+            }.format(differenceInDays, 'day'),
+        )
+
+        return `${relativeDate}, ${formattedDate}`;
     }
 
     return new Intl.DateTimeFormat(
