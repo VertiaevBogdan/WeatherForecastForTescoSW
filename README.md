@@ -1,16 +1,156 @@
-# React + Vite
+# Weather Forecast App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplikace umožňuje uživateli vyhledat obec pomocí našeptávače a zobrazit předpověď počasí na následujících 5 dní. Data o počasí jsou získávána prostřednictvím OpenWeather API.
 
-Currently, two official plugins are available:
+## Přehled funkcí
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Předpověď počasí na 5 dní
+- Vyhledávání obce pomocí našeptávače
+- Ovládání našeptávače pomocí klávesnice (šipky, Enter, Escape)
+- Zjištění aktuální polohy pomocí geolokace prohlížeče
+- Rozdělení předpovědi podle částí dne:
+  - Nyní
+  - Ráno
+  - Den
+  - Večer
+  - Noc
+- Aktuální a pocitová teplota
+- Popis počasí a ikona (ikony jsou získávány z OpenWeather)
+- Rychlost větru
+- Vlhkost
+- Atmosférický tlak
+- Formátování data podle jazyka nastaveného v prohlížeči (čeština pro `cs`, angličtina pro ostatní jazyky)
+- Responzivní zobrazení pro desktop, tablet a mobilní zařízení
+- Zobrazení stavu načítání a chybových stavů
 
-## React Compiler
+## Použité technologie
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- JavaScript (ES6+)
+- HTML5
+- CSS3 / Sass (SCSS)
+- Axios
+- Vite
+- OpenWeather API
 
-## Expanding the ESLint configuration
+## Instalace
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Naklonujte repozitář:
+
+```bash
+git clone https://github.com/VertiaevBogdan/WeatherForecastForTescoSW.git
+```
+
+Přejděte do adresáře projektu:
+
+```bash
+cd WeatherForecastForTescoSW
+```
+
+Nainstalujte závislosti:
+
+```bash
+npm install
+```
+
+## Proměnné prostředí
+
+Aplikace vyžaduje API klíč služby OpenWeather.
+
+V kořenovém adresáři projektu vytvořte soubor `.env`:
+
+```env
+VITE_OPENWEATHER_API_KEY=your_api_key
+```
+
+API klíč lze získat po registraci ve službě OpenWeather.
+
+Soubor `.env` není součástí repozitáře.
+
+## Spuštění aplikace
+
+Vývojový server spustíte příkazem:
+
+```bash
+npm run dev
+```
+
+Vite následně zobrazí lokální adresu aplikace v terminálu.
+
+## Kontrola kódu pomocí linteru
+
+```bash
+npm run lint
+```
+
+## Podporované prohlížeče
+
+Aplikace podporuje nejnovější verze následujících prohlížečů:
+
+- Google Chrome
+- Mozilla Firefox
+- Microsoft Edge
+
+## Struktura projektu
+
+```text
+src/
+├── api/
+│   └── weatherApi.js
+├── components/
+│   ├── ForecastDay.jsx
+│   ├── ForecastDisplay.jsx
+│   ├── ForecastPeriod.jsx
+│   └── Search.jsx
+├── data/
+│   └── city.list.json
+├── utils/
+│   ├── cityUtils.js
+│   ├── translationsUtils.js
+│   └── weatherUtils.js
+├── styles/
+│   ├── _mixins.scss
+│   ├── _reset.scss
+│   ├── _variables.scss
+│   └── main.scss
+├── App.jsx
+└── main.jsx
+```
+
+### `api`
+
+Obsahuje komunikaci s OpenWeather API.
+
+### `components`
+
+Obsahuje React komponenty používané pro vyhledávání obce a zobrazení předpovědi počasí.
+
+### `data`
+
+Obsahuje lokální JSON soubor se seznamem obcí používaný našeptávačem.
+
+### `utils`
+
+Obsahuje pomocné funkce pro vyhledávání obcí, transformaci dat o počasí, lokalizaci, formátování data a práci s ikonami počasí.
+
+### `styles`
+
+Obsahuje globální SCSS styly, proměnné, mixiny a reset stylů.
+
+## Zdroje dat
+
+Data předpovědi počasí jsou získávána prostřednictvím OpenWeather API.
+
+Pro našeptávač obcí je používán lokální JSON soubor se seznamem obcí.
+
+## Lokalizace
+
+Data jsou formátována podle aktuálního jazyka prohlížeče pomocí JavaScript Internationalization API (`Intl`).
+
+Uživatelské rozhraní podporuje češtinu a angličtinu. Pokud je jazyk prohlížeče nastaven na češtinu, aplikace automaticky použije českou lokalizaci. V ostatních případech je použita angličtina.
+
+## Geolokace
+
+Aplikace může pomocí Geolocation API prohlížeče zjistit aktuální polohu uživatele a načíst předpověď počasí pro danou lokalitu.
+
+Použití geolokace vyžaduje souhlas uživatele.
