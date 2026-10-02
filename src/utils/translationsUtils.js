@@ -34,6 +34,9 @@ const translations = {
         moderateRain: 'Moderate rain',
         heavyRain: 'Heavy rain',
         snow: 'Snow',
+
+        welcomeTitle: 'Weather forecast',
+        welcomeText: 'Search for a city or use your location to see the 5-day weather forecast.',
     },
 
     cs: {
@@ -71,6 +74,9 @@ const translations = {
         moderateRain: 'Déšť',
         heavyRain: 'Silný déšť',
         snow: 'Sněžení',
+
+        welcomeTitle: 'Předpověď počasí',
+        welcomeText: 'Vyhledejte město nebo použijte svou polohu pro zobrazení předpovědi na 5 dní.',
     }
 };
 
