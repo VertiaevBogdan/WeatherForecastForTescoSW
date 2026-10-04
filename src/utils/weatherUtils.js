@@ -113,11 +113,11 @@ export const formatWeatherDate = (weatherDate) => {
     ).format(date);
 
     if (targetDate.getTime() === today.getTime()) {
-        return `${t('today')}`;
+        return `${t('Today')}`;
     }
 
     if (targetDate.getTime() === tomorrow.getTime()) {
-        return `${t('tomorrow')}`;
+        return `${t('Tomorrow')}`;
     }
 
     return formattedDate;
